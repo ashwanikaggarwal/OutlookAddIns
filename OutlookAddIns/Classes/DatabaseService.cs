@@ -31,15 +31,17 @@ namespace OutlookAddIns.Classes
 
             string SQL = "SELECT ContactID FROM TblContacts WHERE Email ='" + email + "';";
             Access.Dao.Recordset rs = db.OpenRecordset(SQL);
+
+            if (rs.EOF && rs.BOF) return new List<int>() { 0 };
             rs.MoveFirst();
 
-            while (rs.EOF && rs.BOF)
+            while (rs.EOF == false)
             {
                 contactIDs.Add(rs.Fields["ContactID"].Value);
                 rs.MoveNext();
             }
 
-
+            return contactIDs;
         }
         #endregion
 

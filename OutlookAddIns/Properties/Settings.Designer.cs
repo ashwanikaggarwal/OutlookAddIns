@@ -31,5 +31,33 @@ namespace OutlookAddIns.Properties {
                 return ((string)(this["Database"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("First Name;Last Name;JobTitle;Address;Phone;Mobile;Email;Website;Twitter;Instagra" +
+            "m")]
+        public string RegistrationFields {
+            get {
+                return ((string)(this["RegistrationFields"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("[First Name];Surname;JobTitle;;[Direct Tel No];MobileTelNumber;Email")]
+        public string RegistrationDatabaseFields {
+            get {
+                return ((string)(this["RegistrationDatabaseFields"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Address1;Address2;Address3;Town;County;Postcode;Country;Web;Twitter;Instagram")]
+        public string AddressFields {
+            get {
+                return ((string)(this["AddressFields"]));
+            }
+        }
     }
 }

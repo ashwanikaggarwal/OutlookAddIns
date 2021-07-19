@@ -10,8 +10,10 @@ namespace OutlookAddIns
 {
     public partial class ThisAddIn
     {
+        public Outlook.Application app;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            app = Application;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

@@ -5,5 +5,14 @@
     <Setting Name="Database" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Y:\Merge Database\The Merge Database_be.mdb</Value>
     </Setting>
+    <Setting Name="RegistrationFields" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">First Name;Last Name;JobTitle;Address;Phone;Mobile;Email;Website;Twitter;Instagram</Value>
+    </Setting>
+    <Setting Name="RegistrationDatabaseFields" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[First Name];Surname;JobTitle;;[Direct Tel No];MobileTelNumber;Email</Value>
+    </Setting>
+    <Setting Name="AddressFields" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Address1;Address2;Address3;Town;County;Postcode;Country;Web;Twitter;Instagram</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
