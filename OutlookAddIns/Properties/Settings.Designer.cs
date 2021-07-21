@@ -34,8 +34,8 @@ namespace OutlookAddIns.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("First Name;Last Name;JobTitle;Address;Phone;Mobile;Email;Website;Twitter;Instagra" +
-            "m")]
+        [global::System.Configuration.DefaultSettingValueAttribute("First Name;Last Name;Job Title;Address;Phone;Mobile;Email;Website;Twitter;Instagr" +
+            "am;Company on Badge")]
         public string RegistrationFields {
             get {
                 return ((string)(this["RegistrationFields"]));
@@ -57,6 +57,32 @@ namespace OutlookAddIns.Properties {
         public string AddressFields {
             get {
                 return ((string)(this["AddressFields"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"	{""TableName"":""TblContacts"", ""TableFields"":[
+		{""FormField"":""First Name"", ""DbField"": ""[First Name]""},
+        {""FormField"":""Last Name"", ""DbField"": ""Surname""},
+        {""FormField"":""First Name"", ""DbField"": ""Salutation""},
+        {""FormField"":""Job Title"", ""DbField"": ""JobTitle""},
+        {""FormField"":""Phone"", ""DbField"": ""[Direct Tel No]""},
+        {""FormField"":""Mobile"", ""DbField"": ""MobileTelNumber""},
+        {""FormField"":""Email"", ""DbField"": ""Email""}
+	]}")]
+        public string mainJSON {
+            get {
+                return ((string)(this["mainJSON"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("22")]
+        public int CurrentVisitorExhibition {
+            get {
+                return ((int)(this["CurrentVisitorExhibition"]));
             }
         }
     }

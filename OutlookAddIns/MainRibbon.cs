@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using OutlookAddIns.Forms;
+using OutlookAddIns.Classes;
+using System.Windows.Forms;
 
 namespace OutlookAddIns
 {
@@ -31,7 +33,7 @@ namespace OutlookAddIns
             string regFields = Properties.Settings.Default.RegistrationFields;
             string[] fields = regFields.Split(';');
             string value = "Not Found";
-            Dictionary<string, object> contactDetails = new Dictionary<string, object>();
+            Dictionary<string, string> contactDetails = new Dictionary<string, string>();
             bool foundEmail = false;
             int position;
             string[] bodyLines;
@@ -41,12 +43,17 @@ namespace OutlookAddIns
             {
                 if (item is Outlook.MailItem)
                 {
+                    //reset variables
+                    contactDetails.Clear();
+                    foundEmail = false;
+
                     content = (Outlook.MailItem)item;
                     bodyLines = content.Body.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
                     //we iterate through the body, split in lines
                     foreach (string line in bodyLines)
                     {
+                        //then we iterate through the fields we want, and extract the information into our Dictionary contactDetails
                         for(int i = 0; i < fields.Length; i++)
                         {
                             string field = fields[i];
@@ -83,13 +90,60 @@ namespace OutlookAddIns
 
                     }
 
-                    
+                    //put the details into a class
+                    ContactDetails allDetails = new ContactDetails();
+                    allDetails.SetFromDictionary(contactDetails);
+
+                    //once we found all the details we start the tests
+                    KeyDetails details = new KeyDetails();
+                    details.Company = contactDetails["Company on Badge"];
+                    details.FirstName = contactDetails["First Name"];
+                    details.LastName = contactDetails["Last Name"];
+                    details.Email = contactDetails["Email"];
+
+                    DatabaseService db = new DatabaseService();
+                    int contactID;
+                    //contactID = db.FindPerfectRegistration(details);
+                    contactID = db.FindContactReference(details);
+
+                    switch (contactID)
+                    {
+                        case 0:
+                            content.Categories = content.Categories + ";Yellow Category; Found Something";
+                            break;
+
+                        case 201:
+                            if (db.CreateBrandNew(allDetails))
+                            {
+                                content.Categories = content.Categories + ";Green Category; Created New!";
+                            }
+                            else
+                            {
+                                content.Categories = content.Categories + ";Red Category; Not Created";
+                            }
+
+                            break;
+
+                        default:
+                            if (db.AddRegistration(contactID) && db.UpdateContactInfo(contactID, contactDetails))
+                            {
+                                content.Categories = content.Categories + "; Registered";
+                            }
+                            else
+                            {
+                                content.Categories = content.Categories + ";Red Category; Something Went Wrong";
+                            }
+                            break;
+                    }
+                    content.MarkAsTask(Outlook.OlMarkInterval.olMarkTomorrow);
+                    content.Save();
+
+
+
                 }
             }
 
-            //open form with email found
-            frmRegisterRequest form = new frmRegisterRequest(contactDetails);
-            form.Show();
+
         }
 
     }

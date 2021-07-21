@@ -6,13 +6,27 @@
       <Value Profile="(Default)">Y:\Merge Database\The Merge Database_be.mdb</Value>
     </Setting>
     <Setting Name="RegistrationFields" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">First Name;Last Name;JobTitle;Address;Phone;Mobile;Email;Website;Twitter;Instagram</Value>
+      <Value Profile="(Default)">First Name;Last Name;Job Title;Address;Phone;Mobile;Email;Website;Twitter;Instagram;Company on Badge</Value>
     </Setting>
     <Setting Name="RegistrationDatabaseFields" Type="System.String" Scope="Application">
       <Value Profile="(Default)">[First Name];Surname;JobTitle;;[Direct Tel No];MobileTelNumber;Email</Value>
     </Setting>
     <Setting Name="AddressFields" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Address1;Address2;Address3;Town;County;Postcode;Country;Web;Twitter;Instagram</Value>
+    </Setting>
+    <Setting Name="mainJSON" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">	{"TableName":"TblContacts", "TableFields":[
+		{"FormField":"First Name", "DbField": "[First Name]"},
+        {"FormField":"Last Name", "DbField": "Surname"},
+        {"FormField":"First Name", "DbField": "Salutation"},
+        {"FormField":"Job Title", "DbField": "JobTitle"},
+        {"FormField":"Phone", "DbField": "[Direct Tel No]"},
+        {"FormField":"Mobile", "DbField": "MobileTelNumber"},
+        {"FormField":"Email", "DbField": "Email"}
+	]}</Value>
+    </Setting>
+    <Setting Name="CurrentVisitorExhibition" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">22</Value>
     </Setting>
   </Settings>
 </SettingsFile>
